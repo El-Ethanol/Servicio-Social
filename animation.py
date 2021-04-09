@@ -1,6 +1,5 @@
 from random import randint
  
- 
 class Puzzle:
     def __init__(self):
         self.items = {}
@@ -121,6 +120,4 @@ while True:
     if g.game_over():
         print('You WON')
         break
-2
-3
-2
+
