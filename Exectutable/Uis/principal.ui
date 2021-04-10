@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>494</width>
-    <height>470</height>
+    <height>517</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -115,7 +115,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>250</y>
+      <y>310</y>
       <width>161</width>
       <height>65</height>
      </rect>
@@ -145,45 +145,11 @@ background-color: rgb(56, 56, 56);</string>
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>170</y>
-      <width>371</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="b1">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(56, 56, 56);
-color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Iniciar Sensor</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="b2">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(56, 56, 56);</string>
-       </property>
-       <property name="text">
-        <string>Detener Sensor</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QWidget" name="layoutWidget_2">
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>360</y>
+      <y>400</y>
       <width>371</width>
       <height>61</height>
      </rect>
@@ -235,6 +201,62 @@ color: rgb(85, 255, 127);</string>
     <property name="text">
      <string>Tiempo de recolección:</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>204</y>
+      <width>371</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="b1">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(56, 56, 56);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Iniciar Sensor</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="b2">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(56, 56, 56);</string>
+       </property>
+       <property name="text">
+        <string>Detener Sensor</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="b15">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(56, 56, 56);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Pausar Sensor</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="b25">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(56, 56, 56);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Continuar</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

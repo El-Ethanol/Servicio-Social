@@ -1,5 +1,4 @@
 import time, test
-
 from numpy.core.numeric import False_
 import pyqtgraph as pg
 import matplotlib.pyplot as plt
@@ -32,13 +31,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Main Window
         self.thread.finished.connect(self.worker.stop)
 
         # Start Button action:
-        self.b1.clicked.connect(self.thread.start)
+        self.b1.clicked.connect(self.thread.start)#Iniciar Sensor
+        self.b1.pressed.connect(self.reiniciar)
 
         # Stop Button action:
-        self.b2.clicked.connect(self.stop_thread)
+        self.b2.clicked.connect(self.stop_thread)#Detener Sensor
         
-        #Other buttons
-        
+        #Other buttons  
         self.b3.clicked.connect(self.presionventana)#Presión Actual
         self.b4.clicked.connect(self.grafventana)#Gráfica
         self.b5.clicked.connect(self.prueba)#Guardar Datos
@@ -46,10 +45,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Main Window
         self.r1.clicked.connect(self.determinado)#Determinado
         self.r2.clicked.connect(self.indeterminado)#Indeterminado
         
-        quit = QAction("Quit", self)
+        quit = QAction("Quit", self)#Preguntar para cerrar
         quit.triggered.connect(self.closeEvent)
-
-        
 
         self.show()
 
@@ -77,15 +74,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Main Window
          tiempo1=float(self.l1.text())
          tiempo2=False
          
-         
      def indeterminado(self):
          global tiempo2
          tiempo2=True
+     
+     def reiniciar(self):
+         test.run=True
          
      def prueba(self):
          print(tiempo1)
          print(tiempo2)
-        
           
      def closeEvent(self,event):
           close = QMessageBox()
