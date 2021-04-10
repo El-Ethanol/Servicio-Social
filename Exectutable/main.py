@@ -1,10 +1,16 @@
+import time, test
+
+from numpy.core.numeric import False_
+import pyqtgraph as pg
+import matplotlib.pyplot as plt
+from PresionMain import *
+from PyQt5 import QtWidgets        
 from PyQt5.QtCore import pyqtSignal, QThread, QObject
-from principal import *
-import time        
-import test     
+from PyQt5.QtWidgets import QMessageBox, QAction
+from principal import *  
 from test import *
           
-class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Ventana Principal
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Main Window
      
      stop_signal = pyqtSignal()
      
@@ -12,7 +18,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Ventana Principal
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
        
-     # Thread:
+    # Thread:
         self.thread = QThread()
         self.worker = Worker()
         self.stop_signal.connect(self.worker.stop)  # connect stop signal to worker stop method
@@ -33,26 +39,70 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Ventana Principal
         
         #Other buttons
         
-        self.b3.clicked.connect(self.hello)#Presión Actual
-        self.b4.clicked.connect(self.hello)#Gráfica
-        self.b5.clicked.connect(self.hello)#Guardar Gráfica
-        self.b6.clicked.connect(self.hello)#Guardar Datos
-        self.r1.clicked.connect(self.hello)#Determinado
-        self.r2.clicked.connect(self.hello)#Indeterminado
+        self.b3.clicked.connect(self.presionventana)#Presión Actual
+        self.b4.clicked.connect(self.grafventana)#Gráfica
+        self.b5.clicked.connect(self.prueba)#Guardar Datos
+        self.b6.clicked.connect(self.hello)#Guardar Gráfica
+        self.r1.clicked.connect(self.determinado)#Determinado
+        self.r2.clicked.connect(self.indeterminado)#Indeterminado
+        
+        quit = QAction("Quit", self)
+        quit.triggered.connect(self.closeEvent)
+
         
 
         self.show()
 
-    # When stop_btn is clicked this runs. Terminates the worker and the thread.
+    # Definitions
      def stop_thread(self):
-        self.stop_signal.emit()  # emit the finished signal on stop
+        self.stop_signal.emit()
         
      def hello(self):
           print("Hello")
-       
-class Worker(QObject): #Contador
-    
-    finished = pyqtSignal()  # give worker class a finished signal
+          
+     def presionventana(self):
+          self.window = QtWidgets.QMainWindow()
+          self.ui1 = WindowPresion()
+          self.ui1.setupUi(self.window)
+          self.window.show()
+     
+     def grafventana(self):
+          y = [2,4,6,8,10,12,14,16,18,20]
+          x = range(0,10)
+          plt = pg.plot(x, y, title="Gráfica", pen='r')
+          plt.showGrid(x=True,y=True)
+          
+     def determinado(self):
+         global tiempo1,tiempo2
+         tiempo1=float(self.l1.text())
+         tiempo2=False
+         
+         
+     def indeterminado(self):
+         global tiempo2
+         tiempo2=True
+         
+     def prueba(self):
+         print(tiempo1)
+         print(tiempo2)
+        
+          
+     def closeEvent(self,event):
+          close = QMessageBox()
+          close.setWindowTitle("Salir...")
+          close.setText("¿Deseas salir?")
+          close.setIcon(QMessageBox.Question)
+          close.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+          close.setStyleSheet("color: rgb(255, 255, 255); background-color: rgb(64, 64, 64);")
+          close = close.exec()
+
+          if close == QMessageBox.Yes:
+             event.accept()
+          else:
+             event.ignore()
+            
+class Worker(QObject): #Counter 
+    finished = pyqtSignal()
 
     def __init__(self, parent=None):
         QObject.__init__(self, parent=parent)
@@ -60,10 +110,10 @@ class Worker(QObject): #Contador
 
     def do_work(self):
         s_main()
-        self.finished.emit()  # emit the finished signal when the loop is done
+        self.finished.emit() 
 
     def stop(self):
-        test.run= False  # set the run condition to false on stop
+        test.run= False 
         
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
