@@ -1,11 +1,11 @@
 import time, test
-from numpy.core.numeric import False_
+from numpy.core.numeric import False_, ones_like
 import pyqtgraph as pg
 import matplotlib.pyplot as plt
 from PresionMain import *
 from PyQt5 import QtWidgets        
 from PyQt5.QtCore import pyqtSignal, QThread, QObject
-from PyQt5.QtWidgets import QMessageBox, QAction
+from PyQt5.QtWidgets import QInputDialog, QMessageBox, QAction
 from principal import *  
 from test import *
           
@@ -16,46 +16,52 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Main Window
      def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
-       
-    # Thread:
-        self.thread = QThread()
-        self.worker = Worker()
-        self.stop_signal.connect(self.worker.stop)  # connect stop signal to worker stop method
-        self.worker.moveToThread(self.thread)
+        self.setStyleSheet("color: rgb(255, 255, 255); background-color: rgb(35, 35, 35);") 
+        self.count = 0
+        self.start = False
+        timer = QTimer(self)
+        timer.timeout.connect(self.showTime)
+        timer.start(100)
 
-        self.worker.finished.connect(self.thread.quit)  # connect the workers finished signal to stop thread
-        self.worker.finished.connect(self.worker.deleteLater)  # connect the workers finished signal to clean up worker
-        self.thread.finished.connect(self.thread.deleteLater)  # connect threads finished signal to clean up thread
-
-        self.thread.started.connect(self.worker.do_work)
-        self.thread.finished.connect(self.worker.stop)
-
-        # Start Button action:
-        self.b1.clicked.connect(self.thread.start)#Iniciar Sensor
-        self.b1.pressed.connect(self.reiniciar)
-
-        # Stop Button action:
-        self.b2.clicked.connect(self.stop_thread)#Detener Sensor
+        # Sensor Buttons:
+        self.b1.clicked.connect(self.start_action)#Iniciar Sensor
+        self.b25.clicked.connect(self.reset_action)#Reiniciar Sensor
+        self.b2.clicked.connect(self.pause_action)#Detener Sensor
         
         #Other buttons  
         self.b3.clicked.connect(self.presionventana)#Presión Actual
         self.b4.clicked.connect(self.grafventana)#Gráfica
-        self.b5.clicked.connect(self.prueba)#Guardar Datos
-        self.b6.clicked.connect(self.hello)#Guardar Gráfica
+        self.b5.clicked.connect(self.guardarg)#Guardar Gráfica
+        self.b6.clicked.connect(self.guardard)#Guardar Datos
         self.r1.clicked.connect(self.determinado)#Determinado
         self.r2.clicked.connect(self.indeterminado)#Indeterminado
         
-        quit = QAction("Quit", self)#Preguntar para cerrar
+        quit = QAction("Quit", self)#Close
         quit.triggered.connect(self.closeEvent)
 
         self.show()
 
     # Definitions
-     def stop_thread(self):
-        self.stop_signal.emit()
-        
-     def hello(self):
-          print("Hello")
+    
+     def showTime(self):
+        if self.start:
+            self.count = self.count+1
+            print(self.count)
+            time.sleep(1)
+            if self.count == tiempo1:
+                self.start = False
+                
+     def start_action(self):
+        self.start = True
+        if self.count == tiempo1:
+            self.start = False
+  
+     def pause_action(self):
+        self.start = False
+  
+     def reset_action(self):
+        self.start = False
+        self.count = 0
           
      def presionventana(self):
           self.window = QtWidgets.QMainWindow()
@@ -75,15 +81,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Main Window
          tiempo2=False
          
      def indeterminado(self):
-         global tiempo2
+         global tiempo1, tiempo2
          tiempo2=True
-     
-     def reiniciar(self):
-         test.run=True
-         
-     def prueba(self):
-         print(tiempo1)
-         print(tiempo2)
+         tiempo1=0
           
      def closeEvent(self,event):
           close = QMessageBox()
@@ -98,20 +98,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow): #Main Window
              event.accept()
           else:
              event.ignore()
-            
-class Worker(QObject): #Counter 
-    finished = pyqtSignal()
-
-    def __init__(self, parent=None):
-        QObject.__init__(self, parent=parent)
-        test.run=True
-
-    def do_work(self):
-        s_main()
-        self.finished.emit() 
-
-    def stop(self):
-        test.run= False 
+             
+     def guardard(self):
+          text= QtWidgets.QInputDialog.getText(self, 'Guardar Como:', 'Guardar Como:')   
+          if text[1]:
+             nombre = text[0]
+             print(nombre)        
+             
+     def guardarg(self):
+          text= QtWidgets.QInputDialog.getText(self, 'Guardar Como:', 'Guardar Como:')   
+          if text[1]:
+             nombre = text[0]
+             print(nombre)
+           
         
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(494, 517)
+        MainWindow.resize(485, 517)
         MainWindow.setStyleSheet("background-color: rgb(35, 35, 35);\n"
 "border-color: rgb(255, 255, 255);\n"
 "selection-color: rgb(255, 255, 255);")
@@ -63,7 +63,7 @@ class Ui_MainWindow(object):
         self.r2.setObjectName("r2")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.r2)
         self.layoutWidget1 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget1.setGeometry(QtCore.QRect(170, 310, 161, 65))
+        self.layoutWidget1.setGeometry(QtCore.QRect(170, 280, 161, 100))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -104,31 +104,29 @@ class Ui_MainWindow(object):
 "color: rgb(85, 255, 127);")
         self.label_2.setObjectName("label_2")
         self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(60, 204, 371, 71))
+        self.widget.setGeometry(QtCore.QRect(66, 190, 361, 67))
         self.widget.setObjectName("widget")
-        self.gridLayout = QtWidgets.QGridLayout(self.widget)
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout.setObjectName("gridLayout")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
         self.b1 = QtWidgets.QPushButton(self.widget)
         self.b1.setStyleSheet("background-color: rgb(56, 56, 56);\n"
 "color: rgb(255, 255, 255);")
         self.b1.setObjectName("b1")
-        self.gridLayout.addWidget(self.b1, 0, 0, 1, 1)
+        self.horizontalLayout.addWidget(self.b1)
         self.b2 = QtWidgets.QPushButton(self.widget)
         self.b2.setStyleSheet("color: rgb(255, 255, 255);\n"
 "background-color: rgb(56, 56, 56);")
         self.b2.setObjectName("b2")
-        self.gridLayout.addWidget(self.b2, 0, 1, 1, 1)
-        self.b15 = QtWidgets.QPushButton(self.widget)
-        self.b15.setStyleSheet("background-color: rgb(56, 56, 56);\n"
-"color: rgb(255, 255, 255);")
-        self.b15.setObjectName("b15")
-        self.gridLayout.addWidget(self.b15, 1, 0, 1, 1)
+        self.horizontalLayout.addWidget(self.b2)
+        self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.b25 = QtWidgets.QPushButton(self.widget)
-        self.b25.setStyleSheet("background-color: rgb(56, 56, 56);\n"
-"color: rgb(255, 255, 255);")
+        self.b25.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background-color: rgb(56, 56, 56);")
         self.b25.setObjectName("b25")
-        self.gridLayout.addWidget(self.b25, 1, 1, 1, 1)
+        self.verticalLayout_2.addWidget(self.b25)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -154,9 +152,8 @@ class Ui_MainWindow(object):
         self.b5.setText(_translate("MainWindow", "Guardar Gráfica (.png)"))
         self.label_2.setText(_translate("MainWindow", "Tiempo de recolección:"))
         self.b1.setText(_translate("MainWindow", "Iniciar Sensor"))
-        self.b2.setText(_translate("MainWindow", "Detener Sensor"))
-        self.b15.setText(_translate("MainWindow", "Pausar Sensor"))
-        self.b25.setText(_translate("MainWindow", "Continuar"))
+        self.b2.setText(_translate("MainWindow", "Pausar Sensor"))
+        self.b25.setText(_translate("MainWindow", "Detener Sensor"))
         self.actionGuardar_Datos_cvs.setText(_translate("MainWindow", "Guardar Datos (.cvs)"))
         self.actionGuardas_Gr_fica_png.setText(_translate("MainWindow", "Guardas Gráfica (.png)"))
 
