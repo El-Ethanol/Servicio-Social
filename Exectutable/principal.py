@@ -153,7 +153,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Tiempo de recolección:"))
         self.b1.setText(_translate("MainWindow", "Iniciar Sensor"))
         self.b2.setText(_translate("MainWindow", "Pausar Sensor"))
-        self.b25.setText(_translate("MainWindow", "Detener Sensor"))
+        self.b25.setText(_translate("MainWindow", "Reiniciar Sensor"))
         self.actionGuardar_Datos_cvs.setText(_translate("MainWindow", "Guardar Datos (.cvs)"))
         self.actionGuardas_Gr_fica_png.setText(_translate("MainWindow", "Guardas Gráfica (.png)"))
 
